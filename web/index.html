@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>鸟类识别 ONNX Demo</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>浏览器端鸟类识别</h1>
+      <p>页面会直接在浏览器里加载 ONNX 模型完成推理，不依赖 Python 后端。首次加载模型可能需要一点时间，请通过静态服务器访问页面。</p>
+      <div class="notice">
+        推荐访问方式：在当前 <code>src</code> 目录执行 <code>python -m http.server 8000</code>，然后打开 <code>http://localhost:8000/web/</code>。
+      </div>
+    </section>
+
+    <section class="grid">
+      <section class="panel">
+        <div class="panel-body">
+          <h2>输入</h2>
+          <div class="status-stack">
+            <div class="status" id="model-status">模型状态：等待加载</div>
+            <div class="status" id="csv-status">标签状态：等待加载</div>
+            <div class="status" id="run-status">推理状态：尚未开始</div>
+          </div>
+
+          <div class="field">
+            <label for="image-input">上传图片</label>
+            <input class="input" id="image-input" type="file" accept="image/*">
+          </div>
+
+          <div class="field">
+            <label for="mode-select">预测模式</label>
+            <select class="select" id="mode-select">
+              <option value="normal">normal</option>
+              <option value="tta" selected>tta（原图 + 水平翻转平均）</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="topk-select">结果数量</label>
+            <select class="select" id="topk-select">
+              <option value="1">1</option>
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <button class="button" id="predict-button" disabled>加载资源中...</button>
+          </div>
+
+          <div class="preview" id="preview-box">
+            <div class="preview-placeholder">上传图片后，这里会显示预览。</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-body">
+          <div class="results-header">
+            <h2>预测结果</h2>
+            <div class="results-meta" id="results-meta">等待图片</div>
+          </div>
+
+          <div id="results-root">
+            <div class="empty">当前还没有预测结果。页面会读取 <code>../models/model20240824.onnx</code> 和 <code>../db/bird_info.csv</code>，然后在浏览器里完成推理。</div>
+          </div>
+
+          <div class="footnote">预处理与 <code>scripts/predict.py</code> 对齐：短边缩放到 256，中心裁剪到 224，并按 ImageNet 均值和方差归一化。</div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="./vendor/onnxruntime/ort.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
