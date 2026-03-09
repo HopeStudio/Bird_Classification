@@ -27,6 +27,8 @@ bird-classify
 - `models/model20240824.pth`
 - `db/bird_info.csv`
 
+其中 `models/model20240824.pth` 也可以直接在仓库的 Release 页面下载，然后放到 `models/` 目录中。
+
 可以在项目根目录执行：
 
 ```bash
