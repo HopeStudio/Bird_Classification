@@ -1,0 +1,66 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env/
+
+# Conda
+.conda/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Data files
+data/*
+!data/README.md
+!data/.gitkeep
+
+# Model files
+models/*
+!models/README.md
+!models/.gitkeep
+
+# Database / exported metadata
+db/*
+!db/README.md
+!db/.gitkeep
+
+# Common large ML / model artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.bin
+*.safetensors
+*.sqlite
+*.db
+*.csv
+*.tsv
+*.parquet
+*.npy
+*.npz
+*.h5
+*.hdf5
+
